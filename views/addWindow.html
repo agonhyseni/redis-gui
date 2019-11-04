@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Connect to Redis DB</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <form>
+      <div>
+        <label>Enter Host</label>
+        <input type="text" id="host" autofocus value="127.0.0.1">
+        <label>Enter Port</label>
+        <input type="text" id="port" autofocus value="6379">
+        <label>Enter Password</label>
+        <input type="text" id="password" autofocus value='password123'>
+      </div>
+      <button class="waves-effect waves-light btn" type="submit">Connect</button>
+    </form>
+  </div>
+  <script src="../scripts/addWindow.js"></script>
+</body>
+</html>

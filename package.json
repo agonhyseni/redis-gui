@@ -1,0 +1,18 @@
+{
+  "name": "redis-gui",
+  "version": "0.0.1",
+  "description": "Electron Redis GUI desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Agon Hyseni",
+  "dependencies": {
+    "bluebird": "^3.7.1",
+    "electron": "^1.7.6",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^9.1.0"
+  }
+}
