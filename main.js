@@ -72,6 +72,7 @@ function parseKeyspaces(lines) {
       dbstats[parts[0].slice(2)] = value;
     }
   });
+  return dbstats;
 }
 
 ipcMain.on('redis:connect', function (error, data) {
