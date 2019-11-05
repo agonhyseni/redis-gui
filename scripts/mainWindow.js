@@ -108,7 +108,7 @@ const resetSearch = () => {
     myFunction();
 }
 
-    // ul.addEventListener('dblclick', function (e) {
-    //   const item = e.target.innerText.toString();
-    //   ipcRenderer.send('redis:openItem', item);
-    // });
+ul.addEventListener('dblclick', function (e) {
+    const key = e.target.innerText.toString();
+    ipcRenderer.send('redis:openKey', key);
+});

@@ -139,30 +139,62 @@ ipcMain.on('redis:changeDb', async function (error, key) {
   mainWindow.webContents.send('redis:keys', keys);
 });
 
-/*
-ipcMain.on('redis:openItem', function (error, item) {
-  openItemWindow = new BrowserWindow({
-    width: 600,
-    height: 400,
-    title: 'Connect to redis database'
-  });
+ipcMain.on('redis:openKey', async function (error, key) {
+  try {
+    openItemWindow = new BrowserWindow({
+      width: 600,
+      height: 400,
+      title: 'Connect to redis database',
+      resizable: false
+    });
 
-  openItemWindow.once('did-finish-load', () => {
-    openItemWindow.webContents.send('redis:itemOpen', item);
-  });
+    let item = null;
+    openItemWindow.webContents.once('did-finish-load', () => {
+      if (item) {
+        openItemWindow.webContents.send('redis:openKey', item);
+      }
+    });
 
-  openItemWindow.loadURL(url.format({
-    pathname: path.join(__dirname, './views/openItemWindow.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+    openItemWindow.on('close', function () {
+      openItemWindow = null;
+    });
+    
+    openItemWindow.loadURL(url.format({
+      pathname: path.join(__dirname, './views/openItemWindow.html'),
+      protocol: 'file:',
+      slashes: true
+    }));
 
-  // Handle garbage collection
-  openItemWindow.on('close', function () {
-    openItemWindow = null;
-  });
+    const type = await client.typeAsync(key);
+    switch (type) {
+      case 'string':
+        item = await client.getAsync(key);
+        break;
+      case 'list':
+        item = await client.lrangeAsync(key, 0, -1);
+        break;
+      case 'set':
+        item = await client.smembersAsync(key);
+        break;
+      case 'zset':
+        item = await client.zrangeAsync(key, 0, -1);
+        break;
+      case 'hash':
+        item = await client.hgetallAsync(key);
+        break;
+      case 'stream':
+        item = await client.xrangeAsync(key, 0, -1);
+        break;
+      default: break;
+    }
+
+    if (!openItemWindow.webContents.isLoading && item) {
+      openItemWindow.webContents.send('redis:openKey', item);
+    }
+  } catch (error) {
+    console.error(error);
+  }
 });
-*/
 
 const mainMenuTemplate = [
   {
