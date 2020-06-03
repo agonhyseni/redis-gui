@@ -8,7 +8,7 @@
   },
   "author": "Agon Hyseni",
   "dependencies": {
-    "bluebird": "^3.7.1",
+    "bluebird": "^3.7.2",
     "electron": "^1.7.6",
     "redis": "^2.8.0"
   },
