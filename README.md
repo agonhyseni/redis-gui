@@ -1,6 +1,6 @@
-# Redis GUI Desktop App
+# Redis GUI with Electron
 
-This is a Redis GUI application built on electron
+This is a Redis GUI application built on Electron
 
 ### Version
 1.0.0
